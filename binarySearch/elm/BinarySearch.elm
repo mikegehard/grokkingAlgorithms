@@ -6,9 +6,10 @@ module BinarySearch exposing (..)
 findNumber : List Int -> Int -> Bool
 findNumber numbers numberToFind =
   let
-    middleIndex = List.length numbers // 2
-    firstHalf = List.take middleIndex numbers
-    lastHalf = List.drop middleIndex numbers
+    sortedList = List.sort numbers
+    middleIndex = List.length sortedList // 2
+    firstHalf = List.take middleIndex sortedList
+    lastHalf = List.drop middleIndex sortedList
     _ = Debug.log "guess" 1
   in
     case List.head lastHalf of
