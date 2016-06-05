@@ -3,7 +3,8 @@ module SelectionSort exposing (..)
 sort : List Int -> List Int
 sort items =
   let
-    max = List.maximum items
+    -- max = List.maximum items
+    min = List.minimum items
     remove : Int -> List Int -> List Int
     -- This can be implemented multiple ways...
     -- remove item items =
@@ -19,7 +20,9 @@ sort items =
     remove item items = List.filter ((/=) item) items
 
   in
-    case max of
+    -- case max of
+    case min of
       Nothing -> items
       Just(m) ->
-        sort (remove m items) ++ [m]
+        -- sort (remove m items) ++ [m]
+        m :: sort (remove m items)
