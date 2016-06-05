@@ -1,11 +1,11 @@
 module SelectionSort exposing (..)
 
-sort : List Int -> List Int
+sort : List comparable -> List comparable
 sort items =
   let
     -- max = List.maximum items
     min = List.minimum items
-    remove : Int -> List Int -> List Int
+    remove : comparable -> List comparable -> List comparable
     -- This can be implemented multiple ways...
     -- remove item items =
     --   case items of
