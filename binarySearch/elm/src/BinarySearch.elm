@@ -3,7 +3,7 @@ module BinarySearch exposing (..)
 -- There is an issue searching a list bigger than ~10000
 -- because not tail recursive
 -- RangeError: Maximum call stack size exceeded
-findNumber : List Int -> Int -> Bool
+findNumber : List comparable -> comparable -> Bool
 findNumber numbers numberToFind =
   case numbers of
     [] ->
