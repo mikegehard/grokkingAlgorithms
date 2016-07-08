@@ -3,8 +3,11 @@ module TestRunner exposing (..)
 import BinarySearchTest exposing (..)
 import ElmTest exposing (..)
 
+
 tests : Test
-tests = BinarySearchTest.testSuite
+tests =
+    BinarySearchTest.testSuite
+
 
 main : Program Never
 main =
