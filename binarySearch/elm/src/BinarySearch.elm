@@ -6,7 +6,7 @@ module BinarySearch exposing (..)
 
 
 findNumber : List comparable -> comparable -> Bool
-findNumber numbers numberToFind =
+findNumber numberToFind numbers =
     case numbers of
         [] ->
             False
@@ -22,11 +22,11 @@ findNumber numbers numberToFind =
                 middleIndex =
                     List.length sortedList // 2
 
-                firstHalf =
-                    List.take middleIndex sortedList
-
                 lastHalf =
                     List.drop middleIndex sortedList
+
+                foo =
+                    findNumber numberToFind
 
                 _ =
                     Debug.log "guess" 1
@@ -36,9 +36,10 @@ findNumber numbers numberToFind =
                         if numberToFind == middleElement then
                             True
                         else if numberToFind < middleElement then
-                            findNumber firstHalf numberToFind
+                            List.take middleIndex sortedList |> foo
+                            -- findNumber numberToFind (List.take middleIndex sortedList)
                         else
-                            findNumber lastHalf numberToFind
+                            lastHalf |> foo
 
                     Nothing ->
                         False
