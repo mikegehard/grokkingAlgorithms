@@ -1,6 +1,7 @@
 module ClassSchedulingSpec where
 
 import           ClassScheduling
+import           Data.List
 import           Test.Hspec
 import           Test.QuickCheck
 import           Test.QuickCheck.Arbitrary
@@ -36,6 +37,15 @@ instance Arbitrary Class where
 prop_noTimeOverlap :: [Class] -> Bool
 prop_noTimeOverlap classes = noTimeOverlap $ schedule classes
 
+prop_findsEarliestEndingClass :: [Class] -> Bool
+prop_findsEarliestEndingClass [] = True
+prop_findsEarliestEndingClass classes =
+  let
+    firstScheduledClass = head $ schedule classes
+    earliestEndingClass = head $ sortOn endTime classes
+  in
+    endTime firstScheduledClass == endTime earliestEndingClass
+
 noTimeOverlap :: [Class] -> Bool
 noTimeOverlap []  = True
 noTimeOverlap [a] = True
@@ -48,7 +58,8 @@ spec = do
       schedule testClasses `shouldBe` expectedClasses
 
   describe "schedule" $ do
-    it "works with QuickCheck" $ property prop_noTimeOverlap
+    it "has no time overlap" $ property prop_noTimeOverlap
+    it "finds the earliest ending class" $ property prop_findsEarliestEndingClass
 
 main :: IO ()
 main = hspec spec
